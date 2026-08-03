@@ -1,6 +1,7 @@
 package com.cfs.bookmyshow.service;
 
 import com.cfs.bookmyshow.dto.SeatRequest;
+import com.cfs.bookmyshow.entity.Screen;
 import com.cfs.bookmyshow.entity.Seat;
 import com.cfs.bookmyshow.repository.SeatRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,11 +18,13 @@ public class SeatService {
 
     //add Seat;
     public Seat addSeat(SeatRequest request){
+        Screen screen=screenService.getScreenById(request.getScreenId());
         Seat seat = Seat.builder()
                 .seatNumber(request.getSeatNumber())
                 .seatType(request.getSeatType())
                 .col(Integer.valueOf(request.getCol()))
                 .row(request.getRow())
+                .screen(screen)
                 .build();
         return seatRepository.save(seat);
     }

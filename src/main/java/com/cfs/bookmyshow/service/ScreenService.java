@@ -1,7 +1,10 @@
 package com.cfs.bookmyshow.service;
 
+import com.cfs.bookmyshow.dto.ScreenRequest;
+import com.cfs.bookmyshow.dto.SeatRequest;
 import com.cfs.bookmyshow.entity.Movie;
 import com.cfs.bookmyshow.entity.Screen;
+import com.cfs.bookmyshow.entity.Seat;
 import com.cfs.bookmyshow.entity.Theater;
 import com.cfs.bookmyshow.repository.ScreenRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +20,17 @@ public class ScreenService {
     private final TheaterService theaterService;
 
     //addscreen
+
+    public Screen addScreen(ScreenRequest request){
+        Theater theater=theaterService.getTheaterById(request.getTheaterId());
+        Screen screen = Screen.builder()
+                .name(request.getName())
+                .totalSeats(request.getTotalSeats())
+                .theater(theater)
+                .build();
+        return screenRepository.save(screen);
+    }
+
     public Screen addMovie(Screen screen){
         return screenRepository.save(screen);
     }

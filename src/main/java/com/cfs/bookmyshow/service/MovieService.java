@@ -1,5 +1,6 @@
 package com.cfs.bookmyshow.service;
 
+import com.cfs.bookmyshow.dto.MovieRequest;
 import com.cfs.bookmyshow.entity.Movie;
 import com.cfs.bookmyshow.entity.Theater;
 import com.cfs.bookmyshow.repository.MovieRepository;
@@ -14,7 +15,16 @@ public class MovieService {
 
     private final MovieRepository movieRepository;
 
-    public Movie addMovie(Movie movie){
+    public Movie addMovie(MovieRequest request){
+        Movie movie = new Movie();
+
+        movie.setTitle(request.getTitle());
+        movie.setGenre(request.getGenre());
+        movie.setLanguage(request.getLanguage());
+        movie.setDurationMinutes(request.getDuration());
+        movie.setReleaseDate(request.getReleaseDate());
+
+
         return movieRepository.save(movie);
     }
 
@@ -39,18 +49,15 @@ public class MovieService {
         return movieRepository.findByLanguage(language);
     }
 
-    public Movie updateMovie(Long id, Movie updatedMovie) {
+    public Movie updateMovie(Long id, MovieRequest request) {
         Movie movie = movieRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Movie not found with id: " + id));
 
-        movie.setTitle(updatedMovie.getTitle());
-        movie.setGenre(updatedMovie.getGenre());
-        movie.setLanguage(updatedMovie.getLanguage());
-        movie.setDurationMinutes(updatedMovie.getDurationMinutes());
-        movie.setReleaseDate(updatedMovie.getReleaseDate());
-        movie.setDescription(updatedMovie.getDescription());
-        movie.setPostUrl(updatedMovie.getPostUrl());
-        movie.setRating(updatedMovie.getRating());
+        movie.setTitle(request.getTitle());
+        movie.setGenre(request.getGenre());
+        movie.setLanguage(request.getLanguage());
+        movie.setDurationMinutes(request.getDuration());
+        movie.setReleaseDate(request.getReleaseDate());
 
         return movieRepository.save(movie);
     }

@@ -18,5 +18,4 @@ public class MovieRequest {
         private String language;
         private LocalDate releaseDate;
         private String genre;
-
 }

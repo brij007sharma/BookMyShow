@@ -25,5 +25,5 @@ public class Movie {
     private Integer durationMinutes;
     private Double rating;
     private LocalDate releaseDate;
-    private String postUrl;
+    private String posterUrl;
 }

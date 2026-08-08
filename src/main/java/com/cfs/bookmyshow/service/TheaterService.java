@@ -13,7 +13,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TheaterService {
 
-    public TheaterRepository theaterRepository;
+    private final TheaterRepository theaterRepository;
     public CityService cityService;
 
     public Theater addTheater(TheaterRequest request){

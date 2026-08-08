@@ -3,6 +3,7 @@ package com.cfs.bookmyshow.controller;
 import com.cfs.bookmyshow.dto.BookingRequest;
 import com.cfs.bookmyshow.entity.Booking;
 import com.cfs.bookmyshow.entity.City;
+import com.cfs.bookmyshow.entity.Seat;
 import com.cfs.bookmyshow.service.BookingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +18,7 @@ public class BookingController {
 
     private final BookingService bookingService;
 
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<Booking> createBooking(@RequestBody BookingRequest request){
         return ResponseEntity.ok(bookingService.createBooking(request));
     }
@@ -37,7 +38,10 @@ public class BookingController {
         return ResponseEntity.ok(bookingService.cancelBooking(id));
     }
 
-
+    @GetMapping("/show/{showId}/available-seats")
+    public ResponseEntity<List<Seat>> getAvailableSeats(@PathVariable Long showId){
+        return ResponseEntity.ok(bookingService.getAvailableSeats(showId));
+    }
 
 
 

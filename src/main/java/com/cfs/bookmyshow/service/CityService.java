@@ -15,7 +15,7 @@ import java.util.Optional;
 public class CityService {
 
     private final UserRepository userRepository;
-    private CityRepository cityRepository;
+    private final CityRepository cityRepository;
 
     public City addCity(City city){
         return cityRepository.save(city);

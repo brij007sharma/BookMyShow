@@ -1,5 +1,6 @@
 package com.cfs.bookmyshow.controller;
 
+import com.cfs.bookmyshow.dto.AuthResponse;
 import com.cfs.bookmyshow.dto.LoginRequest;
 import com.cfs.bookmyshow.dto.UserRequest;
 import com.cfs.bookmyshow.entity.User;
@@ -23,8 +24,13 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    private ResponseEntity<User> login(@RequestBody LoginRequest request){
-        return ResponseEntity.ok(userService.login(request));
+    public ResponseEntity<AuthResponse> login(
+            @RequestBody LoginRequest request
+    ) {
+
+        return ResponseEntity.ok(
+                userService.login(request)
+        );
     }
 
     @GetMapping

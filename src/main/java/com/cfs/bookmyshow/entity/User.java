@@ -3,12 +3,15 @@ package com.cfs.bookmyshow.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name="users")
-@Getter @Setter
-@NoArgsConstructor @AllArgsConstructor
+@Table(name = "users")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class User {
 
@@ -19,18 +22,27 @@ public class User {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false,unique = true)
+    @Column(nullable = false, unique = true)
     private String email;
 
+    @JsonIgnore
     @Column(nullable = false)
     private String password;
 
     private String phone;
 
+    @Column(nullable = false)
+    @Builder.Default
+    private String role = "USER";
+
     private LocalDateTime createdAt;
 
     @PrePersist
-    protected void onCreate(){
-        this.createdAt=LocalDateTime.now();
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
+
+        if (role == null) {
+            role = "USER";
+        }
     }
 }

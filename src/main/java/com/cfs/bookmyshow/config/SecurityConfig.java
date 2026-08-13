@@ -82,8 +82,23 @@ public class SecurityConfig {
                         // ==========================
 
                         .requestMatchers(
+                                HttpMethod.OPTIONS,
+                                "/**"
+                        ).permitAll()
+
+                        .requestMatchers(
                                 "/api/users/register",
                                 "/api/users/login"
+                        ).permitAll()
+
+                        .requestMatchers(
+                                HttpMethod.GET,
+                                "/api/movies/**",
+                                "/api/cities/**",
+                                "/api/theaters/**",
+                                "/api/screens/**",
+                                "/api/seats/**",
+                                "/api/shows/**"
                         ).permitAll()
 
 
